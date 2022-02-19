@@ -10,7 +10,7 @@ class Api::V1::RepositoriesController < ApplicationController
 
   def create
     begin
-      repository = Repositories::StoreRepositoryService.new(repository_params).execute
+      repository = Repositories::CreateRepositoryService.new(repository_params).execute
       render json: repository, status: :created
     rescue Exception => e
       render json: { error: true, message: [e] }, status: 500
@@ -30,6 +30,15 @@ class Api::V1::RepositoriesController < ApplicationController
     begin
       repository = Repositories::UpdateRepositoryByIdService.new(params[:id], repository_params).execute
       render json: repository, status: :ok
+    rescue Exception => e
+      render json: { error: true, message: [e] }, status: 500
+    end
+  end
+
+  def destroy
+    begin
+      res = Repositories::DestroyRepositoryByIdService.new(params[:id]).execute
+      render json: {}, status: :no_content
     rescue Exception => e
       render json: { error: true, message: [e] }, status: 500
     end

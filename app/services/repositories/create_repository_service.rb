@@ -1,5 +1,5 @@
 module Repositories
-  class StoreRepositoryService
+  class CreateRepositoryService
     def initialize(params)
       @params = params
     end
