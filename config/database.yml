@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: githubapi_rails
+  min_messages: warning
+  username: root
+  password: Reistr851120@
+  host: 127.0.0.1
+  port: 3306
+
+test:
+  <<: *default
+  # database: db/test.sqlite3
+
+production:
+  <<: *default
+  # database: db/production.sqlite3
