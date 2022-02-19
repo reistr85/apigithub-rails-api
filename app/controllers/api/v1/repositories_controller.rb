@@ -4,7 +4,7 @@ class Api::V1::RepositoriesController < ApplicationController
       repositories = Repositories::GetAllRepositoriesService.new(params).execute
       render json: repositories, status: :ok
     rescue Exception => e
-      render json: { error: true, message: [e] }, status: 500
+      render json: { error: true, message: e }, status: 500
     end
   end
 
@@ -13,7 +13,7 @@ class Api::V1::RepositoriesController < ApplicationController
       repository = Repositories::CreateRepositoryService.new(repository_params).execute
       render json: repository, status: :created
     rescue Exception => e
-      render json: { error: true, message: [e] }, status: 500
+      render json: { error: true, message: e }, status: 500
     end
   end
 
@@ -22,7 +22,7 @@ class Api::V1::RepositoriesController < ApplicationController
       repository = Repositories::GetRepositoryByIdService.new(params[:id]).execute
       render json: repository, status: :ok
     rescue Exception => e
-      render json: { error: true, message: [e] }, status: 500
+      render json: { error: true, message: e }, status: 500
     end
   end
 
@@ -31,7 +31,7 @@ class Api::V1::RepositoriesController < ApplicationController
       repository = Repositories::UpdateRepositoryByIdService.new(params[:id], repository_params).execute
       render json: repository, status: :ok
     rescue Exception => e
-      render json: { error: true, message: [e] }, status: 500
+      render json: { error: true, message: e }, status: 500
     end
   end
 
@@ -40,7 +40,7 @@ class Api::V1::RepositoriesController < ApplicationController
       res = Repositories::DestroyRepositoryByIdService.new(params[:id]).execute
       render json: {}, status: :no_content
     rescue Exception => e
-      render json: { error: true, message: [e] }, status: 500
+      render json: { error: true, message: e }, status: 500
     end
   end
 
